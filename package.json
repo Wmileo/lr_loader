@@ -1,0 +1,23 @@
+{
+  "name": "@lr17/loader",
+  "version": "1.0.0",
+  "description": "loader",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:Wmileo/lr_loader.git"
+  },
+  "keywords": [
+    "loader"
+  ],
+  "author": "Wmileo",
+  "license": "ISC",
+  "devDependencies": {
+  },
+  "dependencies": {
+    "miniprogram-ci": "^1.8.35"
+  }
+}
