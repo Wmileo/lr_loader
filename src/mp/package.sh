@@ -32,9 +32,9 @@ fi
 ####################################### build
 
 if [[ $b_method == "production" ]] && [[ $b_env == "prod" ]]; then
-yarn cross-env dt_type=package VITE_ENV="${b_env}" uni -p mp-weixin-prod
+yarn cross-env LR_TYPE=package VITE_ENV="${b_env}" uni -p mp-weixin-prod
 else 
-yarn cross-env dt_type=package VITE_ENV="${b_env}" uni -p mp-weixin
+yarn cross-env LR_TYPE=package VITE_ENV="${b_env}" uni -p mp-weixin
 fi
 
 node ./node_modules/@dt/loader/mp/"${b_next}".js ${b_env} ${b_version} ${r_num}

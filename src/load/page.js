@@ -113,11 +113,12 @@ function dirs(pages, ext) {
 }
 
 function load(opt) {
+  let cover = process.env.VITE_ENV == 'prod' || process.env.LR_TYPE == 'package' || process.env.LR_COVER == '1'
   if (opt.page) {
-    loadPages(opt.page.from, opt.page.paths, opt.cover)
+    loadPages(opt.page.from, opt.page.paths, cover)
   }
   if (opt.component) {
-    loadComponents(opt.component.from, opt.component.paths, opt.cover)
+    loadComponents(opt.component.from, opt.component.paths, cover)
   }
 }
 

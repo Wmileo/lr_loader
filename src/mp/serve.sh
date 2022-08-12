@@ -3,13 +3,9 @@
 project_path="$(cd "$(dirname "$0")";pwd)/../../../../dist/build/mp-weixin" # 工程绝对路径
 echo "${project_path}"
 
-git_name="$(git rev-parse --abbrev-ref HEAD)"
-b_version="${git_name#*-}" #构建版本号
-b_version="${b_version#*/}" #构建版本号
-
-b_env="prod" #构建环境
+b_cover="none" #是否覆盖
 if [[ -n $1 ]]; then
-  b_env=$1
+  b_cover=$1
 fi
 
 ####################################### tool cli
@@ -28,20 +24,12 @@ else # window
   open="start"
 fi
 ####################################### build
-yarn
 
-if [[ $b_env == "prod" ]]; then
-yarn cross-env VITE_ENV="${b_env}" uni build -p mp-weixin-prod
+if [[ $b_cover == "cover" ]]; then
+yarn
+yarn cross-env VITE_ENV=dev LR_COVER=1 uni -p mp-weixin
 else 
-yarn cross-env VITE_ENV="${b_env}" uni build -p mp-weixin
+yarn cross-env VITE_ENV=dev uni -p mp-weixin
 fi
 
-"${cli}" upload --project "${project_path}" -v "${b_version}" -d "自动打包 - ${b_env}"
-
 "${cli}" open --project "${project_path}"
-
-echo "\n 🎉 🎉 🎉   Done  请前往 https://mp.weixin.qq.com/ 提交审核\n \n"
-
-"${open}" https://mp.weixin.qq.com/
-
-sleep 1m
