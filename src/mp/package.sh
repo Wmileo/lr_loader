@@ -37,4 +37,4 @@ else
 yarn cross-env LR_TYPE=package VITE_ENV="${b_env}" uni -p mp-weixin
 fi
 
-node ./node_modules/@dt/loader/mp/"${b_next}".js ${b_env} ${b_version} ${r_num}
+node ./node_modules/@lr17/loader/src/mp/"${b_next}".js ${b_env} ${b_version} ${r_num}

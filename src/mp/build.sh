@@ -1,6 +1,6 @@
 #!/bin/sh
 ####################################### project
-project_path="$(cd "$(dirname "$0")";pwd)/../../../../dist/build/mp-weixin" # 工程绝对路径
+project_path="$(cd "$(dirname "$0")";pwd)/../../../../../dist/build/mp-weixin" # 工程绝对路径
 echo "${project_path}"
 
 git_name="$(git rev-parse --abbrev-ref HEAD)"
@@ -13,7 +13,7 @@ if [[ -n $1 ]]; then
 fi
 
 ####################################### tool cli
-tool_path=$(cat ./node_modules/@dt/loader/mp/wxpath)
+tool_path=$(cat ./node_modules/@lr17/loader/src/mp/wxpath)
 os=`uname  -a`
 if [[ $os =~ "Darwin" ]]; then # mac
   cli="${tool_path}/Contents/MacOS/cli"
