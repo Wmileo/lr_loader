@@ -1,6 +1,6 @@
 {
   "name": "@lr17/loader",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "loader",
   "main": "index.js",
   "publishConfig": {
@@ -12,6 +12,9 @@
   },
   "keywords": [
     "loader"
+  ],
+  "files": [
+    "src"
   ],
   "author": "Wmileo",
   "license": "ISC",
