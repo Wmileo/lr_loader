@@ -58,7 +58,7 @@ function loadPages(from, pages, cover) {
 
   function _copy() {
     pages.forEach(page => {
-      let src = path.resolve(`./node_modules/${from}/${page}`)
+      let src = path.resolve(`${from}/${page}`)
       let dst = path.resolve(`./src/pages_com/${page}`)
       console.log(src, '=>', dst)
       tryCopy(src, dst)
@@ -87,7 +87,7 @@ function loadComponents(from, dirs, cover) {
     let d = path.resolve(`./src/${name}`)
 
     function _copy() {
-      let src = path.resolve(`./node_modules/${from}`)
+      let src = path.resolve(`${from}`)
       console.log(src, '=>', d)
       tryCopy(src, d)
     }
