@@ -29,6 +29,22 @@ function copy(src, dst) {
   })
 }
 
+function deleteDir(dir) {
+  var files = [];
+  if (fs.existsSync(dir)) {
+    files = fs.readdirSync(dir);
+    files.forEach(function(file, index) {
+      var curPath = dir + "/" + file;
+      if (fs.statSync(curPath).isDirectory()) { // recurse
+        deleteDir(curPath);
+      } else { // delete file
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(dir);
+  }
+}
+
 function tryCopy(src, dst) {
   file(dst, () => {
     copy(src, dst)
@@ -50,9 +66,21 @@ function exist(src, yes, no) {
   }
 }
 
-function cover(from, to) {
-  console.log(`LR: 开始覆盖目录从 ${from} 到 ${to}`)
-  tryCopy(path.resolve(from), path.resolve(to))
+function build(from, to, dirs) {
+  console.log(`LR: 开始构建`)
+  console.log(`LR: 开始清空 ${to}`)
+  deleteDir(path.resolve(to))
+  if (dirs) {
+    function _copy() {
+      console.log('LR: 开始复制', dirs?.toString() ?? '')
+      dirs.forEach(p => {
+        tryCopy(path.resolve(`${from}/${p}`), path.resolve(`${to}/${p}`))
+      })
+    }
+    file(path.resolve(to), _copy)
+  } else {
+    tryCopy(path.resolve(from), path.resolve(to))
+  }
 }
 
 function loadPages(from, pages, cover) {
@@ -61,10 +89,8 @@ function loadPages(from, pages, cover) {
 
   function _copy() {
     console.log('LR: 开始复制页面', pages.toString())
-    pages.forEach(page => {
-      let src = path.resolve(`${from}/${page}`)
-      let dst = path.resolve(`./src/pages_com/${page}`)
-      tryCopy(src, dst)
+    pages.forEach(p => {
+      tryCopy(path.resolve(`${from}/${p}`), path.resolve(`./src/pages_com/${p}`))
     })
   }
 
@@ -89,8 +115,7 @@ function loadComponents(from, dirs, cover) {
 
     function _copy() {
       console.log('LR: 开始复制组件到', dirs.toString())
-      let src = path.resolve(`${from}`)
-      tryCopy(src, d)
+      tryCopy(path.resolve(`${from}`), d)
     }
 
     exist(d, () => {
@@ -113,15 +138,16 @@ function dirs(pages, ext) {
 }
 
 function load(opt) {
-  let cover = process.env.VITE_ENV == 'prod' || process.env.LR_TYPE == 'package' || process.env.LR_COVER == '1'
+  let cover = process.env.VITE_ENV == 'prod' || process.env.LR_TYPE == 'package' || process.env
+    .LR_COVER == '1'
   if (opt.page) {
     loadPages(opt.page.from, opt.page.paths, cover)
   }
   if (opt.component) {
     loadComponents(opt.component.from, opt.component.paths, cover)
   }
-  if (opt.cover) {
-    cover(opt.cover.from, opt.cover.to)
+  if (opt.build) {
+    build(opt.build.from, opt.build.to, opt.build.dirs)
   }
 }
 

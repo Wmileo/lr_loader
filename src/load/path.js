@@ -11,9 +11,9 @@ export default function plugin(opt) {
           }
           return ok
         })
-      } else if (opt.dir && opt.com) {
-        if (path.replace(/\\/g, '/').indexOf(`/${opt.dir}/`) > 0) {
-          code = code.replace(/__com/g, `${opt.dir}/${opt.com}`)
+      } else if (opt.com) {
+        if (path.replace(/\\/g, '/').indexOf(`/src/`) > 0) {
+          code = code.replace(/__com/g, `@/${opt.com}`)
         }
       }
       return code
