@@ -5,7 +5,8 @@ var stat = fs.stat
 function copy(src, dst) {
   fs.readdir(src, function(err, paths) { // 读取目录中的所有文件/目录
     if (err) {
-      console.log('⚠️  ', err.message);
+      console.log('LR - error: ', src, dst);
+      console.log('LR - error: ', err.message);
       throw err
     }
     paths.forEach(function(path) {
@@ -17,7 +18,6 @@ function copy(src, dst) {
           throw err
         }
         if (st.isFile()) { // 判断是否为文件
-          console.log('load', _dst)
           let readable = fs.createReadStream(_src) // 创建读取流
           let writable = fs.createWriteStream(_dst) // 创建写入流
           readable.pipe(writable) // 通过管道来传输流
@@ -37,7 +37,6 @@ function tryCopy(src, dst) {
 
 function file(src, cb) {
   exist(src, cb, () => {
-    console.log('create', src)
     fs.mkdirSync(src)
     cb()
   })
@@ -51,28 +50,31 @@ function exist(src, yes, no) {
   }
 }
 
+function cover(from, to) {
+  console.log(`LR: 开始覆盖目录从 ${from} 到 ${to}`)
+  tryCopy(path.resolve(from), path.resolve(to))
+}
+
 function loadPages(from, pages, cover) {
-  console.log('🚗  ------------------------')
-  console.log(`🚗  开始加载 ${from} `)
+  console.log(`LR: 开始加载页面 ${from} `)
   let d = path.resolve(`./src/pages_com`)
 
   function _copy() {
+    console.log('LR: 开始复制页面', pages.toString())
     pages.forEach(page => {
       let src = path.resolve(`${from}/${page}`)
       let dst = path.resolve(`./src/pages_com/${page}`)
-      console.log(src, '=>', dst)
       tryCopy(src, dst)
     })
   }
 
   exist(d, () => {
     if (cover) {
-      console.log('🚗  目录 pages_com 已存在，将进行覆盖 ！！！！')
+      console.log('LR: 目录 pages_com 已存在，将进行覆盖 ！！！！')
       _copy()
     } else {
-      console.log(`🚗  目录 pages_com 已存在，如需更新，请确保代码已提交 ${from} 后删除该目录并重新运行 ！！！！`)
+      console.log(`LR: 目录 pages_com 已存在，如需更新，请确保代码已提交 ${from} 后删除该目录并重新运行 ！！！！`)
     }
-    console.log('🚗  ------------------------')
   }, () => {
     fs.mkdirSync(d)
     _copy()
@@ -80,26 +82,24 @@ function loadPages(from, pages, cover) {
 }
 
 function loadComponents(from, dirs, cover) {
-  console.log('🚗  ------------------------')
-  console.log(`🚗  开始加载 ${from} `)
+  console.log(`LR: 开始加载组件 ${from} `)
   dirs.forEach(dir => {
     let name = `${dir}/__com`
     let d = path.resolve(`./src/${name}`)
 
     function _copy() {
+      console.log('LR: 开始复制组件到', dirs.toString())
       let src = path.resolve(`${from}`)
-      console.log(src, '=>', d)
       tryCopy(src, d)
     }
 
     exist(d, () => {
       if (cover) {
-        console.log(`🚗  目录 ${name} 已存在，将进行覆盖 ！！！！`)
+        console.log(`LR: 目录 ${name} 已存在，将进行覆盖 ！！！！`)
         _copy()
       } else {
-        console.log(`🚗  目录 ${name} 已存在，如需更新，请确保代码已提交 ${from} 后删除该目录并重新运行 ！！！！`)
+        console.log(`LR: 目录 ${name} 已存在，如需更新，请确保代码已提交 ${from} 后删除该目录并重新运行 ！！！！`)
       }
-      console.log('🚗  ------------------------')
     }, () => {
       _copy()
     })
@@ -119,6 +119,9 @@ function load(opt) {
   }
   if (opt.component) {
     loadComponents(opt.component.from, opt.component.paths, cover)
+  }
+  if (opt.cover) {
+    cover(opt.cover.from, opt.cover.to)
   }
 }
 
