@@ -67,6 +67,7 @@ function exist(src, yes, no) {
 }
 
 function build(from, to, dirs) {
+  console.log(`LR: --------------------`)
   console.log(`LR: 开始构建`)
   console.log(`LR: 开始清空 ${to}`)
   deleteDir(path.resolve(to))
@@ -84,11 +85,12 @@ function build(from, to, dirs) {
 }
 
 function loadPages(from, pages, cover) {
+  console.log(`LR: --------------------`)
   console.log(`LR: 开始加载页面 ${from} `)
   let d = path.resolve(`./src/pages_com`)
-
-  function _copy() {
-    console.log('LR: 开始复制页面', pages.toString())
+  console.log('LR: 开始复制页面', pages.toString())
+  
+  function _copy() {  
     pages.forEach(p => {
       tryCopy(path.resolve(`${from}/${p}`), path.resolve(`./src/pages_com/${p}`))
     })
@@ -108,13 +110,14 @@ function loadPages(from, pages, cover) {
 }
 
 function loadComponents(from, dirs, cover) {
+  console.log(`LR: --------------------`)
   console.log(`LR: 开始加载组件 ${from} `)
   dirs.forEach(dir => {
     let name = `${dir}/__com`
     let d = path.resolve(`./src/${name}`)
-
+    console.log('LR: 开始复制组件到', name)
+    
     function _copy() {
-      console.log('LR: 开始复制组件到', dirs.toString())
       tryCopy(path.resolve(`${from}`), d)
     }
 
