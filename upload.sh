@@ -16,8 +16,8 @@ yarn publish
 git add .
 
 msg="update"
-if [[ -n $1 ]]; then
-  msg=$1
+if [[ -n $1 ]] && [[ -n $2 ]] && [[ $1 == "-m" ]]; then
+  msg=$2
 fi
 
 git commit -m $msg
