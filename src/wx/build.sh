@@ -23,7 +23,7 @@ fi
 project_path="$(cd "$(dirname "$0")";pwd)/../../../../../dist/build/mp-weixin" # 工程绝对路径
 
 ####################################### tool cli
-tool_path=$(cat ./node_modules/@lr17/loader/src/mp/wxpath)
+tool_path=$(cat ./node_modules/@lr17/loader/src/wx/wxpath)
 os=`uname  -a`
 if [[ $os =~ "Darwin" ]]; then # mac
   cli="${tool_path}/Contents/MacOS/cli"

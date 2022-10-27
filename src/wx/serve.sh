@@ -7,7 +7,7 @@ if [[ -n $1 ]]; then
 fi
 
 ####################################### tool cli
-tool_path=$(cat ./node_modules/@lr17/loader/src/mp/wxpath)
+tool_path=$(cat ./node_modules/@lr17/loader/src/wx/wxpath)
 os=`uname  -a`
 if [[ $os =~ "Darwin" ]]; then # mac
   cli="${tool_path}/Contents/MacOS/cli"
