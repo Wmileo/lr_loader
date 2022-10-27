@@ -28,7 +28,7 @@ fs.exists(d, (e) => {
 const project = new ci.Project({
   appid,
   type: 'miniProgram',
-  projectPath: path.resolve('./dist/dev/mp-weixin'),
+  projectPath: path.resolve('./dist/build/mp-weixin'),
   privateKeyPath: path.resolve(`./private.${appid}.key`),
   // ignores: ['node_modules/**/*'],
 })

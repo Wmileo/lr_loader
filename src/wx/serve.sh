@@ -21,16 +21,17 @@ else # window
   cli="${tool_path}/cli.bat"
   open="start"
 fi
-####################################### build
-
-if [[ $b_cover == "cover" ]]; then
-yarn
-yarn cross-env VITE_ENV=dev LR_COVER=1 uni -p mp-weixin
-else 
-yarn cross-env VITE_ENV=dev uni -p mp-weixin
-fi
 
 ####################################### open
 
 project_path="$(cd "$(dirname "$0")";pwd)/../../../../../dist/dev/mp-weixin" # 工程绝对路径
 "${cli}" open --project "${project_path}"
+
+####################################### build
+
+if [[ $b_cover == "cover" ]]; then
+  yarn
+  yarn cross-env VITE_ENV=dev LR_COVER=1 uni -p mp-weixin
+else 
+  yarn cross-env VITE_ENV=dev uni -p mp-weixin
+fi

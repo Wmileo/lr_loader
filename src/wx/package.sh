@@ -32,9 +32,9 @@ fi
 ####################################### build
 
 if [[ $b_method == "production" ]] && [[ $b_env == "prod" ]]; then
-yarn cross-env LR_TYPE=package VITE_ENV="${b_env}" uni -p mp-weixin-prod
+  yarn cross-env LR_TYPE=package VITE_ENV="${b_env}" uni build -p mp-weixin-prod
 else 
-yarn cross-env LR_TYPE=package VITE_ENV="${b_env}" uni -p mp-weixin
+  yarn cross-env LR_TYPE=package VITE_ENV="${b_env}" uni build -p mp-weixin
 fi
 
 node ./node_modules/@lr17/loader/src/wx/"${b_next}".js ${b_env} ${b_version} ${r_num}
