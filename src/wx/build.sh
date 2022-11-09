@@ -15,9 +15,9 @@ echo "LR: 开始构建"
 yarn
 
 if [[ $b_env == "prod" ]]; then
-yarn cross-env VITE_ENV="${b_env}" uni build -p mp-weixin-prod
+yarn cross-env VITE_ENV="${b_env}" LR_COVER=1 uni build -p mp-weixin-prod
 else 
-yarn cross-env VITE_ENV="${b_env}" uni build -p mp-weixin
+yarn cross-env VITE_ENV="${b_env}" LR_COVER=1 uni build -p mp-weixin
 fi
 
 project_path="$(cd "$(dirname "$0")";pwd)/../../../../../dist/build/mp-weixin" # 工程绝对路径

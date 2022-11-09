@@ -89,8 +89,8 @@ function loadPages(from, pages, cover) {
   console.log(`LR: 开始加载页面 ${from} `)
   let d = path.resolve(`./src/pages_com`)
   console.log('LR: 开始复制页面', pages.toString())
-  
-  function _copy() {  
+
+  function _copy() {
     pages.forEach(p => {
       tryCopy(path.resolve(`${from}/${p}`), path.resolve(`./src/pages_com/${p}`))
     })
@@ -116,7 +116,7 @@ function loadComponents(from, dirs, cover) {
     let name = `${dir}/__com`
     let d = path.resolve(`./src/${name}`)
     console.log('LR: 开始复制组件到', name)
-    
+
     function _copy() {
       tryCopy(path.resolve(`${from}`), d)
     }
@@ -141,8 +141,7 @@ function dirs(pages, ext) {
 }
 
 function load(opt) {
-  let cover = process.env.VITE_ENV == 'prod' || process.env.LR_TYPE == 'package' || process.env
-    .LR_COVER == '1'
+  let cover = process.env.LR_COVER == '1'
   if (opt.page) {
     loadPages(opt.page.from, opt.page.paths, cover)
   }
