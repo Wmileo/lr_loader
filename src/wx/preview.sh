@@ -22,4 +22,4 @@ yarn cross-env VITE_ENV="${b_env}" LR_COVER=1 uni build -p "${b_mode}"
 
 echo "LR: 构建完成"
 
-node ./node_modules/@lr17/loader/src/wx/upload.js ${b_env} ${b_version}
+node ./node_modules/@lr17/loader/src/wx/preview.js ${b_env} ${b_version}

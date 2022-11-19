@@ -11,6 +11,7 @@
     "url": "ssh://git@github.com:Wmileo/lr_loader.git"
   },
   "keywords": [
+    "lr",
     "loader"
   ],
   "files": [

@@ -4,12 +4,8 @@ const ci = require('miniprogram-ci')
 let parm = process.argv.slice(2)
 let env = parm[0]
 let version = parm[1]
-let robot = Number(parm[2]) + 3
+let robot = 1
 let { appid } = require(path.resolve('./src/manifest.json'))["mp-weixin"]
-
-let nums = version.split('.')
-let num = Number(nums[nums.length - 1])
-robot = (num % 5) * 6 + robot
 
 console.log('机器人为：', robot)
 
