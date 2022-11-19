@@ -11,14 +11,14 @@ if [ "$log" != "Already up to date." ];then
   exit
 fi
 
-git add .
-
 msg="update"
 if [[ -n $1 ]] && [[ -n $2 ]] && [[ $1 == "-m" ]]; then
   msg=$2
 fi
 
+git add .
 git commit -m $msg
 
 yarn publish
-#git push
+
+git push
