@@ -6,6 +6,11 @@ if [[ -n $1 ]]; then
   b_cover=$1
 fi
 
+b_mode="mp-weixin"
+if [[ -n $2 ]]; then
+  b_mode=$2
+fi
+
 ####################################### tool cli
 tool_path=$(cat ./node_modules/@lr17/loader/src/wx/wxpath)
 os=`uname  -a`
@@ -31,7 +36,7 @@ project_path="$(cd "$(dirname "$0")";pwd)/../../../../../dist/dev/mp-weixin" # å
 
 if [[ $b_cover == "cover" ]]; then
   yarn
-  yarn cross-env VITE_ENV=dev LR_COVER=1 uni -p mp-weixin
+  yarn cross-env VITE_ENV=dev LR_COVER=1 uni -p "${b_mode}"
 else 
-  yarn cross-env VITE_ENV=dev uni -p mp-weixin
+  yarn cross-env VITE_ENV=dev uni -p "${b_mode}"
 fi
