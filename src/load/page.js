@@ -33,7 +33,7 @@ function deleteDir(dir) {
   var files = [];
   if (fs.existsSync(dir)) {
     files = fs.readdirSync(dir);
-    files.forEach(function(file, index) {
+    files.forEach(function(file) {
       var curPath = dir + "/" + file;
       if (fs.statSync(curPath).isDirectory()) { // recurse
         deleteDir(curPath);
@@ -87,21 +87,22 @@ function build(from, to, dirs) {
 function loadPages(from, pages, cover) {
   console.log(`LR: --------------------`)
   console.log(`LR: 开始加载页面 ${from} `)
-  let d = path.resolve(`./src/pages_com`)
+  let upDir = from.split('/').pop()
+  let d = path.resolve(`./src/${upDir}`)
   console.log('LR: 开始复制页面', pages.toString())
 
   function _copy() {
     pages.forEach(p => {
-      tryCopy(path.resolve(`${from}/${p}`), path.resolve(`./src/pages_com/${p}`))
+      tryCopy(path.resolve(`${from}/${p}`), path.resolve(`./src/${upDir}/${p}`))
     })
   }
 
   exist(d, () => {
     if (cover) {
-      console.log('LR: 目录 pages_com 已存在，将进行覆盖 ！！！！')
+      console.log(`LR: 目录 ${upDir} 已存在，将进行覆盖 ！！！！`)
       _copy()
     } else {
-      console.log(`LR: 目录 pages_com 已存在，如需更新，请确保代码已提交 ${from} 后删除该目录并重新运行 ！！！！`)
+      console.log(`LR: 目录 ${upDir} 已存在，如需更新，请确保代码已提交 ${from} 后删除该目录并重新运行 ！！！！`)
     }
   }, () => {
     fs.mkdirSync(d)
@@ -132,12 +133,6 @@ function loadComponents(from, dirs, cover) {
       _copy()
     })
   })
-}
-
-function dirs(pages, ext) {
-  return [...pages.map(item => {
-    return 'pages_com/' + item
-  }), ...ext]
 }
 
 function load(opt) {
