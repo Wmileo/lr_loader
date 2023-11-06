@@ -149,6 +149,5 @@ function load(opt) {
 }
 
 module.exports = {
-  load,
-  dirs
+  load
 }
