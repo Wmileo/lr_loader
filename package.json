@@ -24,6 +24,6 @@
   "license": "ISC",
   "devDependencies": {},
   "dependencies": {
-    "miniprogram-ci": "^1.8.35"
+    "miniprogram-ci": "^2.0.8"
   }
 }
