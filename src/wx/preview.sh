@@ -17,7 +17,7 @@ fi
 ####################################### build
 echo "LR: 开始构建"
 
-npm run cross-env VITE_ENV="${b_env}" LR_COVER=1 uni build -p "${b_mode}"
+npx cross-env VITE_ENV="${b_env}" LR_COVER=1 uni build -p "${b_mode}"
 
 echo "LR: 构建完成"
 
