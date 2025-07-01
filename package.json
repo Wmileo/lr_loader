@@ -1,6 +1,6 @@
 {
   "name": "@lr17/loader",
-  "version": "1.1.9",
+  "version": "2.0.0",
   "description": "loader",
   "main": "index.js",
   "publishConfig": {
