@@ -19,6 +19,6 @@ fi
 git add .
 git commit -m $msg
 
-yarn publish
+npm run publish
 
 git push

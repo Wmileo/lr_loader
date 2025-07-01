@@ -35,8 +35,7 @@ project_path="$(cd "$(dirname "$0")";pwd)/../../../../../dist/dev/mp-weixin" # å
 ####################################### build
 
 if [[ $b_cover == "cover" ]]; then
-  yarn
-  yarn cross-env VITE_ENV=dev LR_COVER=1 uni -p "${b_mode}"
+  npm run cross-env VITE_ENV=dev LR_COVER=1 uni -p "${b_mode}"
 else 
-  yarn cross-env VITE_ENV=dev uni -p "${b_mode}"
+  npm run cross-env VITE_ENV=dev uni -p "${b_mode}"
 fi
