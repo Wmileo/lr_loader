@@ -35,7 +35,7 @@ project_path="$(cd "$(dirname "$0")";pwd)/../../../../../dist/dev/mp-weixin" # å
 ####################################### build
 
 if [[ $b_cover == "cover" ]]; then
-  npx cross-env VITE_ENV=dev LR_COVER=1 uni -p "${b_mode}"
+  npx cross-env VITE_ENV=dev LR_COVER=1 LR_TYPE=dev uni -p "${b_mode}"
 else 
-  npx cross-env VITE_ENV=dev uni -p "${b_mode}"
+  npx cross-env VITE_ENV=dev LR_TYPE=dev uni -p "${b_mode}"
 fi
