@@ -15,10 +15,10 @@ function getWxToolPath() {
       };
     } else { // Windows
       let wxPath = toolPath;
-      if (fs.existsSync('./wxpath')) {
-        wxPath = fs.readFileSync('./wxpath', 'utf8').trim();
+      if (fs.existsSync('./wxpath.txt')) {
+        wxPath = fs.readFileSync('./wxpath.txt', 'utf8').trim();
       } else {
-        console.log('\n ❌ ❌ window系统请创建wxpath文件，内容为微信开发工具安装位置\n');
+        console.log('\n ❌ ❌ window系统请创建wxpath.txt文件，内容为微信开发工具安装位置\n');
         console.log('任意按键关闭窗口');
         process.stdin.read();
         process.exit(1);
@@ -40,6 +40,7 @@ function getGitInfo() {
     const gitBranch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf8' }).trim();
     let b_version = gitBranch.replace(/^.*?-/, ''); // 构建版本号
     b_version = b_version.replace(/^.*?\//, ''); // 构建版本号
+    console.log('b_version', b_version);
     return { gitBranch, b_version };
   } catch (error) {
     console.error('获取git信息失败:', error.message);
